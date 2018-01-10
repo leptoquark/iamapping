@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="assets/css/reset.css" />
+  <style type="text/css">
+    html, body, #visualization, #container {
+      height: 100%;
+      font-family: Verdana, Arial;
+    }
+
+    #container {
+      min-width: 600px;
+      position: relative;
+    }
+
+    #visualization {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 75px;
+      bottom: 0;
+    }
+
+    #dots {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 75px;
+      height: 100%;
+    }
+
+    @media (orientation: portrait) {
+      #visualization {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 150px;
+        height: auto;
+        width: auto;
+      }
+
+      #dots {
+        top: auto;
+        right: 0;
+        left: 0;
+        bottom: 0px;
+        width: 100%;
+        height: 150px;
+      }
+    }
+
+    /* Configure the appearance of "dots" */
+
+    #dots .dot {
+      transition: fill         .5s linear,
+                  stroke       .5s linear,
+                  stroke-width .5s linear;
+
+      stroke-width: 1px;
+      fill: rgba(0,0,0,0);
+      stroke: gray;
+    }
+
+    #dots .dot:hover {
+      fill: #a0a0ff;
+    }
+
+    #dots .groupselection {
+      fill: gray;
+      stroke: gray;
+    }
+
+    #dots .grouphover {
+      stroke: rgba(255,50,50,.7);
+      stroke-width: 3px;
+    }
+
+    #dots .ellipsis {
+      fill: gray;
+      stroke: none;
+    }
+
+    /* Document title bar component. */
+
+    #doctitle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 75px;
+      background-color: rgba(0,0,0,.5);
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      padding-top: 15px;
+      height: 60px;
+      font-size: 30px;
+      color: #f0f0f0;
+      text-align: center;
+
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.5s linear;
+    }
+
+    #doctitle.invisible {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility   0s linear 0.5s,
+                  opacity    0.5s linear;
+    }
+  </style>
+
+  <script src="../carrotsearch.circles.js"></script>
+  <script src="../carrotsearch.circles.asserts.js"></script>
+  <script src="assets/js/carrotsearch.examples.helpers.js"></script>
+  <script src="assets/js/carrotsearch.examples.onresizehook.js"></script>
+  <script src="assets/js/carrotsearch.examples.viewport.js"></script>
+  <script src="assets/js/jquery-1.8.2.min.js"></script>
+  <script src="assets/js/carrotsearch.examples.dots.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <svg id="dots" version="1.1" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div id="visualization"></div>
+    <div id="doctitle" class="invisible"></div>
+  </div>
+
+  <script>
+    function embed() {
+      var container = document.getElementById("visualization");
+      if (container.clientWidth <= 0 || container.clientHeight <= 0 || !window["CarrotSearchCircles"]) {
+        window.setTimeout(embed, 250);
+        return;
+      }
+
+      var circles = new CarrotSearchCircles({
+        id: "visualization",
+        pixelRatio: Math.min(2, window.devicePixelRatio || 1),
+        visibleGroupCount: 8,
+        titleBar: "inscribed",
+        titleBarTextColor: "rgba(0,0,0,.5)",
+        dataObject: null
+      });
+
+      // Convert Carrot2/Lingo3G XML format clusters to data model groups
+      function convert(clusters) {
+        return $(clusters).map(function(index, cluster) {
+          cluster = $(cluster).detach(); // destroys the model, simplifies processing.
+          var subgroups = cluster.children("group").size() > 0 ? convert(cluster.children("group")) : [];
+          return {
+            id:     cluster.attr("id"),
+            label:  cluster.find("group > title > phrase").map(asText).toArray().join(", "),
+            weight: cluster.attr("score") ? cluster.attr("score") : 0,
+            groups: subgroups,
+            documents: cluster.children("document").map(function(i, e) {return $(e).attr("refid"); }).toArray()
+          }
+        }).toArray();
+      }
+
+      function asText(i, e) { return $(e).text(); }
+
+      $.ajax({
+        url:
+             "assets/data/carrot2/ben-and-jerry-200.xml",
+          // "assets/data/carrot2/data-mining-500-topic-hierarchical.xml",
+        dataType: "xml",
+        success: function(data) {
+          var $data = $(data);
+          circles.set("dataObject", {
+              groups: convert($data.find("searchresult > group")),
+              documents: $data.find("searchresult > document").map(function(i, e) {
+                var $e = $(e);
+                return {
+                  "id": $e.attr("id"),
+                  "title": $e.find("title").text()
+                };
+              }).toArray()
+            }
+          );
+        }
+      });
+
+      // Create dots component.
+      new DotsComponent(circles, $("#dots"));
+
+      // Set up helper data structures when a new data model is loaded.
+      var idToDocument = undefined;
+      circles.set("onModelChanged", circles.get("onModelChanged").concat(function(newModel) {
+        if (newModel.documents) {
+          idToDocument = {};
+          newModel.documents.forEach(function(doc) {
+            idToDocument[doc.id] = doc.title;
+          });
+        } else {
+          idToDocument = undefined;
+        }
+      }));
+
+      // Attach listeners to update document title component.
+      $("#dots").on("documentOver", function(e, args) {
+        var $title = $("#doctitle");
+        $title.text("[" + args.id + "]: " + idToDocument[args.id]);
+        $title.removeClass("invisible");
+      });
+
+      $("#dots").on("documentOut", function(e, args) {
+        var $title = $("#doctitle");
+        $title.addClass("invisible");
+      });
+
+      // Attach listeners to modify the selection to all groups
+      // a document is in, upon clicking on that document.
+      $("#dots").on("documentClick", function(e, args) {
+        var docId = args.id;
+        var model = circles.get("dataObject");
+
+        var selection = [];
+        var remaining = model.groups.concat([]);
+        while (remaining.length > 0) {
+          var g = remaining.pop();
+
+          if (g.documents) {
+            if (g.documents.indexOf(docId) >= 0) {
+              selection.push(g.id);
+            }
+          }
+
+          if (g.groups) {
+            // we assume g.groups is smallish, so this will work.
+            Array.prototype.push.apply(remaining, g.groups);
+          }
+        }
+
+        circles.set("selection", {all: true, selected: false});
+        circles.set("selection", selection);
+      });
+
+      installResizeHandlerFor(circles, 0);
+    }
+    embed();
+  </script>
+</body>
+</html>

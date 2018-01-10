@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <style type="text/css"> 
+      html, body, #visualization {
+        height: 100%;
+      }
+    </style>
+
+    <script src="../carrotsearch.circles.js"></script>
+    <script src="../carrotsearch.circles.asserts.js"></script>
+    <script src="assets/js/carrotsearch.examples.onresizehook.js"></script>
+    <script src="assets/js/carrotsearch.examples.viewport.js"></script>
+  </head>
+
+  <body>
+    <div id="visualization"></div>
+
+    <script>
+      function embed() {
+        // We respin until the visualization container has non-zero area (there are race 
+        // conditions on Chrome which permit that) and the visualization class is loaded.
+        var container = document.getElementById("visualization");
+        if (container.clientWidth <= 0 || container.clientHeight <= 0 || !window["CarrotSearchCircles"]) {
+          window.setTimeout(embed, 250);
+          return;
+        }
+
+        // Use the defaults for all parameters.
+        var circles = new CarrotSearchCircles({
+          id: "visualization",
+          captureMouseEvents: false,
+          pixelRatio: Math.min(1.5, window.devicePixelRatio || 1),
+          visibleGroupCount: 0,
+          onBeforeSelection: function(info) { 
+            this.set("zoom", {
+              groups: [info.group.id],
+              zoomed: !info.group.zoomed
+            });
+            return false;
+          },
+          onBeforeZoom: function(info) {
+            this.set("selection", {
+              groups:   [info.group.id],
+              selected: !info.group.selected
+            });
+            return false;
+          },
+          onGroupClick: function(info) {
+            console.log("Click.");
+          }, 
+          onGroupDoubleClick: function(info) {
+            console.log("Dbl Click.");
+          },
+          dataObject: {
+                "groups": [
+        {
+            "id": 0,
+            "label": "Astros",
+            "weight": 100,
+            "groups": [
+                {
+                    "id": 1,
+                    "label": "Astros 6",
+                    "parentLabel": "Astros",
+                    "weight": 100
+                },
+                {
+                    "id": 2,
+                    "label": "Straight Wins",
+                    "parentLabel": "Astros",
+                    "weight": 98
+                },
+                {
+                    "id": 3,
+                    "label": "Strikes",
+                    "parentLabel": "Astros",
+                    "weight": 87
+                },
+                {
+                    "id": 4,
+                    "label": "Astros Feldman",
+                    "parentLabel": "Astros",
+                    "weight": 86
+                },
+                {
+                    "id": 5,
+                    "label": "Sipp",
+                    "parentLabel": "Astros",
+                    "weight": 84
+                },
+                {
+                    "id": 6,
+                    "label": "RTs Count",
+                    "parentLabel": "Astros",
+                    "weight": 82
+                },
+                {
+                    "id": 7,
+                    "label": "Inning for Feldman",
+                    "parentLabel": "Astros",
+                    "weight": 80
+                },
+                {
+                    "id": 8,
+                    "label": "Works",
+                    "parentLabel": "Astros",
+                    "weight": 76
+                },
+                {
+                    "id": 9,
+                    "label": "Whiff for Good",
+                    "parentLabel": "Astros",
+                    "weight": 69
+                },
+                {
+                    "id": 10,
+                    "label": "Whiff x 4",
+                    "parentLabel": "Astros",
+                    "weight": 68
+                },
+                {
+                    "id": 11,
+                    "label": "Astros Lead",
+                    "parentLabel": "Astros",
+                    "weight": 68
+                },
+                {
+                    "id": 12,
+                    "label": "Game",
+                    "parentLabel": "Astros",
+                    "weight": 54
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "label": "Marlins Whiff",
+            "weight": 96,
+            "groups": [
+                {
+                    "id": 19,
+                    "label": "Followers please Retweet",
+                    "parentLabel": "Marlins Whiff",
+                    "weight": 100
+                },
+                {
+                    "id": 20,
+                    "label": "Whiff27forthekids",
+                    "parentLabel": "Marlins Whiff",
+                    "weight": 90
+                },
+                {
+                    "id": 21,
+                    "label": "Marlins Whiff MarlinsRBI",
+                    "parentLabel": "Marlins Whiff",
+                    "weight": 88
+                },
+                {
+                    "id": 22,
+                    "label": "27tweets27retweets",
+                    "parentLabel": "Marlins Whiff",
+                    "weight": 84
+                },
+                {
+                    "id": 23,
+                    "label": "Marlins Whiff Angelasmith42",
+                    "parentLabel": "Marlins Whiff",
+                    "weight": 81
+                },
+                {
+                    "id": 24,
+                    "label": "Game",
+                    "parentLabel": "Marlins Whiff",
+                    "weight": 76
+                },
+                {
+                    "id": 25,
+                    "label": "Marlins Relief",
+                    "parentLabel": "Marlins Whiff",
+                    "weight": 72
+                },
+                {
+                    "id": 26,
+                    "label": "Marlins Whiff KRBulldogMom luvRBI",
+                    "parentLabel": "Marlins Whiff",
+                    "weight": 69
+                }
+            ]
+        },
+        {
+            "id": 29,
+            "label": "Feldman",
+            "weight": 89,
+            "groups": [
+                {
+                    "id": 30,
+                    "label": "Whiff x 10",
+                    "parentLabel": "Feldman",
+                    "weight": 100
+                },
+                {
+                    "id": 31,
+                    "label": "Inning for Feldman",
+                    "parentLabel": "Feldman",
+                    "weight": 97
+                },
+                {
+                    "id": 32,
+                    "label": "Game",
+                    "parentLabel": "Feldman",
+                    "weight": 94
+                },
+                {
+                    "id": 33,
+                    "label": "Scott Feldman Leaves, Whiff of the Night",
+                    "parentLabel": "Feldman",
+                    "weight": 87
+                },
+                {
+                    "id": 34,
+                    "label": "Whiff for Feldman to Start",
+                    "parentLabel": "Feldman",
+                    "weight": 83
+                },
+                {
+                    "id": 35,
+                    "label": "OprahBaseball",
+                    "parentLabel": "Feldman",
+                    "weight": 83
+                },
+                {
+                    "id": 36,
+                    "label": "Whiff x 4",
+                    "parentLabel": "Feldman",
+                    "weight": 76
+                }
+            ]
+        },
+        {
+            "id": 43,
+            "label": "Lead",
+            "weight": 78,
+            "groups": [
+                {
+                    "id": 44,
+                    "label": "Cubs Lead 2-1",
+                    "parentLabel": "Lead",
+                    "weight": 100
+                },
+                {
+                    "id": 45,
+                    "label": "Scoreless Inning for Zack Greinke",
+                    "parentLabel": "Lead",
+                    "weight": 97
+                },
+                {
+                    "id": 46,
+                    "label": "Astros Lead",
+                    "parentLabel": "Lead",
+                    "weight": 95
+                },
+                {
+                    "id": 47,
+                    "label": "Cole Ends the second with a Whiff",
+                    "parentLabel": "Lead",
+                    "weight": 77
+                }
+            ]
+        },
+        {
+            "id": 49,
+            "label": "Strikeout",
+            "weight": 77,
+            "groups": [
+                {
+                    "id": 50,
+                    "label": "mlb_whiffs Strikeout, Whiff Dodgers",
+                    "parentLabel": "Strikeout",
+                    "weight": 100
+                },
+                {
+                    "id": 51,
+                    "label": "Inning",
+                    "parentLabel": "Strikeout",
+                    "weight": 93
+                },
+                {
+                    "id": 52,
+                    "label": "Ball Game with a Strikeout",
+                    "parentLabel": "Strikeout",
+                    "weight": 80
+                }
+            ]
+        },
+        {
+            "id": 70,
+            "label": "Whiff x 2",
+            "weight": 70,
+            "groups": [
+                {
+                    "id": 71,
+                    "label": "Inning for Feldman",
+                    "parentLabel": "Whiff x 2",
+                    "weight": 100
+                },
+                {
+                    "id": 72,
+                    "label": "K. Whiff",
+                    "parentLabel": "Whiff x 2",
+                    "weight": 96
+                },
+                {
+                    "id": 73,
+                    "label": "Marlins",
+                    "parentLabel": "Whiff x 2",
+                    "weight": 74
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "label": "Whiff Pirates",
+            "weight": 98,
+            "groups": [
+                {
+                    "id": 15,
+                    "label": "Whiff Pirates Bradenton RBI",
+                    "parentLabel": "Whiff Pirates",
+                    "weight": 100
+                },
+                {
+                    "id": 16,
+                    "label": "Night Whiff Pirates",
+                    "parentLabel": "Whiff Pirates",
+                    "weight": 74
+                }
+            ]
+        },
+        {
+            "id": 28,
+            "label": "Whiff HighFive",
+            "weight": 93
+        },
+        {
+            "id": 38,
+            "label": "Headshoulders Whiff",
+            "weight": 82,
+            "groups": [
+                {
+                    "id": 39,
+                    "label": "Max_Scherzer did this eleven Times Tonight",
+                    "parentLabel": "Headshoulders Whiff",
+                    "weight": 100
+                },
+                {
+                    "id": 40,
+                    "label": "MLB",
+                    "parentLabel": "Headshoulders Whiff",
+                    "weight": 83
+                }
+            ]
+        },
+        {
+            "id": 42,
+            "label": "PitchersWhoRake Whiff",
+            "weight": 82
+        },
+        {
+            "id": 54,
+            "label": "Dodgers",
+            "weight": 77,
+            "groups": [
+                {
+                    "id": 55,
+                    "label": "mlb_whiffs Strikeout",
+                    "parentLabel": "Dodgers",
+                    "weight": 100
+                },
+                {
+                    "id": 56,
+                    "label": "Whiff Alex Guerrero will Lead, Scoreless Inning for Zack Greinke",
+                    "parentLabel": "Dodgers",
+                    "weight": 98
+                }
+            ]
+        },
+        {
+            "id": 58,
+            "label": "Indians Whiff",
+            "weight": 75
+        },
+        {
+            "id": 59,
+            "label": "Inning for Zack Greinke",
+            "weight": 74
+        },
+        {
+            "id": 64,
+            "label": "Tweet",
+            "weight": 74,
+            "groups": [
+                {
+                    "id": 65,
+                    "label": "mlb_whiffs Strikeout",
+                    "parentLabel": "Tweet",
+                    "weight": 100
+                },
+                {
+                    "id": 66,
+                    "label": "Whiff Pirates Bradenton RBI",
+                    "parentLabel": "Tweet",
+                    "weight": 93
+                },
+                {
+                    "id": 67,
+                    "label": "Whiff Astros",
+                    "parentLabel": "Tweet",
+                    "weight": 76
+                },
+                {
+                    "id": 68,
+                    "label": "Night Whiff Pirates",
+                    "parentLabel": "Tweet",
+                    "weight": 74
+                }
+            ]
+        },
+        {
+            "id": 60,
+            "label": "Max_Scherzer",
+            "weight": 74,
+            "groups": [
+                {
+                    "id": 61,
+                    "label": "Inning",
+                    "parentLabel": "Max_Scherzer",
+                    "weight": 100
+                },
+                {
+                    "id": 62,
+                    "label": "Max_Scherzer did this eleven Times Tonight",
+                    "parentLabel": "Max_Scherzer",
+                    "weight": 98
+                }
+            ]
+        },
+        {
+            "id": 75,
+            "label": "LetsGoBucs",
+            "weight": 69
+        },
+        {
+            "id": 76,
+            "label": "Whiff StanleyCup",
+            "weight": 66
+        },
+        {
+            "id": 77,
+            "label": "Zack Greinke Puts up another 0",
+            "weight": 61
+        },
+        {
+            "id": 78,
+            "label": "Cole",
+            "weight": 59
+        },
+        {
+            "id": 79,
+            "label": "Ends the 1st with a Whiff",
+            "weight": 48
+        }
+    ]
+
+          }
+        });
+
+        installResizeHandlerFor(circles, 0);
+      }
+      embed();
+    </script>
+  </body>
+</html>

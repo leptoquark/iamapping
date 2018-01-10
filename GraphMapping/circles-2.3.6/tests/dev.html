@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../demos/assets/css/reset.css" />
+    <style type="text/css">
+      html, body {
+        height: 100%;
+      }
+
+      #visualization {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 400px;
+        height: 400px;
+      }
+    </style>
+
+    <script src="../carrotsearch.circles.js"></script>
+    <script src="../carrotsearch.circles.asserts.js"></script>
+  </head>
+
+  <body>
+    <div id="visualization"></div>
+
+    <script>
+      var groups = [
+        { label:"Group 1"},
+        { gap: true },
+        { label:"Group 2", weight: 0},
+        { gap: true },
+        { label:"Group 3"},
+        { gap: true }
+      ];
+
+      var target = document.getElementById("visualization");
+
+      var change = function() {
+        groups.forEach(function(e) {
+          e.weight = Math.round(Math.random() < 0.5 ? 0 : Math.random() * 100);
+        });
+        circles.update();
+        window.setTimeout(change, 2000);
+      };
+
+      var circles = new CarrotSearchCircles({
+        element: target,
+        showZeroWeightGroups: false,
+        isGroupVisible: function(group) {
+          return !group.gap;
+        },
+        onRolloutComplete: function() {
+          change();
+        },
+        dataObject: {
+          "groups": groups
+        }
+      });
+    </script>
+  </body>
+</html>
