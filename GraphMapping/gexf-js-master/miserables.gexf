@@ -1,146 +1,212 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gexf xmlns="http://www.gexf.net/1.3" version="1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd">
-  <meta lastmodifieddate="2018-01-10">
-    <creator>Gephi 0.9</creator>
+<gexf xmlns="http://www.gexf.net/1.1draft" version="1.1" xmlns:viz="http://www.gexf.net/1.1draft/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.1draft http://www.gexf.net/1.1draft/gexf.xsd">
+  <meta lastmodifieddate="2011-09-05">
+    <creator>Gephi 0.8</creator>
     <description></description>
   </meta>
-  <graph defaultedgetype="undirected" mode="static">
+  <graph defaultedgetype="undirected" timeformat="double" mode="dynamic">
     <attributes class="node" mode="static">
       <attribute id="modularity_class" title="Modularity Class" type="integer">
         <default>0</default>
       </attribute>
     </attributes>
     <nodes>
-      <node id="11.0" label="Microsoft">
-        <attvalues>
-          <attvalue for="modularity_class" value="0"></attvalue>
-        </attvalues>
-        <viz:size value="20"></viz:size>
-        <viz:position x="-551.4244" y="-532.9547"></viz:position>
-        <viz:color r="29" g="168" b="168"></viz:color>
-      </node>
       <node id="0.0" label="Datalytics">
         <attvalues>
           <attvalue for="modularity_class" value="1"></attvalue>
         </attvalues>
-        <viz:size value="28.685717"></viz:size>
-        <viz:position x="-585.39" y="-93.1931"></viz:position>
+        <viz:size value="21.37143"></viz:size>
+        <viz:position x="-382.45764" y="147.4245"></viz:position>
+        <viz:color r="168" g="168" b="29"></viz:color>
+      </node>
+      <node id="1.0" label="Accenture">
+        <attvalues>
+          <attvalue for="modularity_class" value="1"></attvalue>
+        </attvalues>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-486.80704" y="177.66797"></viz:position>
         <viz:color r="168" g="168" b="29"></viz:color>
       </node>
       <node id="2.0" label="IBM">
         <attvalues>
           <attvalue for="modularity_class" value="0"></attvalue>
         </attvalues>
-        <viz:size value="20"></viz:size>
-        <viz:position x="72.80834" y="-45.055374"></viz:position>
+        <viz:size value="10.971429"></viz:size>
+        <viz:position x="-300.8923" y="69.90642"></viz:position>
         <viz:color r="29" g="168" b="168"></viz:color>
       </node>
       <node id="3.0" label="Oracle">
         <attvalues>
           <attvalue for="modularity_class" value="0"></attvalue>
         </attvalues>
-        <viz:size value="20"></viz:size>
-        <viz:position x="80.86853" y="21.303566"></viz:position>
+        <viz:size value="10.971429"></viz:size>
+        <viz:position x="-296.52637" y="105.850845"></viz:position>
         <viz:color r="29" g="168" b="168"></viz:color>
-      </node>
-      <node id="12.0" label="Amazon">
-        <attvalues>
-          <attvalue for="modularity_class" value="2"></attvalue>
-        </attvalues>
-        <viz:size value="20"></viz:size>
-        <viz:position x="212.1981" y="-386.63068"></viz:position>
-        <viz:color r="29" g="29" b="168"></viz:color>
-      </node>
-      <node id="1.0" label="Accenture">
-        <attvalues>
-          <attvalue for="modularity_class" value="1"></attvalue>
-        </attvalues>
-        <viz:size value="20"></viz:size>
-        <viz:position x="-270.41885" y="153.88902"></viz:position>
-        <viz:color r="168" g="168" b="29"></viz:color>
       </node>
       <node id="4.0" label="Scuter">
         <attvalues>
           <attvalue for="modularity_class" value="1"></attvalue>
         </attvalues>
-        <viz:size value="20"></viz:size>
-        <viz:position x="-206.95738" y="155.66785"></viz:position>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-452.43207" y="178.6315"></viz:position>
         <viz:color r="168" g="168" b="29"></viz:color>
       </node>
       <node id="5.0" label="PWC">
         <attvalues>
           <attvalue for="modularity_class" value="1"></attvalue>
         </attvalues>
-        <viz:size value="20"></viz:size>
-        <viz:position x="-233.33516" y="95.81197"></viz:position>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-466.72003" y="146.20956"></viz:position>
         <viz:color r="168" g="168" b="29"></viz:color>
       </node>
       <node id="6.0" label="Indra">
         <attvalues>
           <attvalue for="modularity_class" value="1"></attvalue>
         </attvalues>
-        <viz:size value="20"></viz:size>
-        <viz:position x="-193.62584" y="256.20212"></viz:position>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-445.21082" y="233.08757"></viz:position>
         <viz:color r="168" g="168" b="29"></viz:color>
       </node>
       <node id="7.0" label="OpenInformatica">
         <attvalues>
           <attvalue for="modularity_class" value="1"></attvalue>
         </attvalues>
-        <viz:size value="20"></viz:size>
-        <viz:position x="-240.55418" y="214.13235"></viz:position>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-470.63034" y="210.29977"></viz:position>
         <viz:color r="168" g="168" b="29"></viz:color>
       </node>
       <node id="8.0" label="Lazioservice">
         <attvalues>
           <attvalue for="modularity_class" value="1"></attvalue>
         </attvalues>
-        <viz:size value=20"></viz:size>
-        <viz:position x="-161.01149" y="195.55344"></viz:position>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-427.5447" y="200.23619"></viz:position>
         <viz:color r="168" g="168" b="29"></viz:color>
       </node>
       <node id="9.0" label="Laziocrea">
         <attvalues>
           <attvalue for="modularity_class" value="1"></attvalue>
         </attvalues>
-        <viz:size value="20"></viz:size>
-        <viz:position x="-127.07967" y="251.66438"></viz:position>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-409.16498" y="230.62962"></viz:position>
         <viz:color r="168" g="168" b="29"></viz:color>
       </node>
       <node id="10.0" label="Procter and Gamble">
         <attvalues>
           <attvalue for="modularity_class" value="0"></attvalue>
         </attvalues>
-        <viz:size value="20"></viz:size>
-        <viz:position x="343.21292" y="-479.73706"></viz:position>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-154.42316" y="-165.54617"></viz:position>
         <viz:color r="29" g="168" b="168"></viz:color>
+      </node>
+      <node id="11.0" label="Microsoft">
+        <attvalues>
+          <attvalue for="modularity_class" value="0"></attvalue>
+          <attvalue for="image" value="https://upload.wikimedia.org/wikipedia/commons/6/6c/Jean_Valjean.JPG"></attvalue>
+          <attvalue for="url" value="Wikipedia: https://en.wikipedia.org/wiki/Jean_Valjean"></attvalue>
+        </attvalues>
+        <viz:size value="60.0"></viz:size>
+        <viz:position x="-65.40625" y="-73.33225"></viz:position>
+        <viz:color r="29" g="168" b="168"></viz:color>
+      </node>
+      <node id="12.0" label="Amazon">
+        <attvalues>
+          <attvalue for="modularity_class" value="2"></attvalue>
+        </attvalues>
+        <viz:size value="9.485714"></viz:size>
+        <viz:position x="-225.38951" y="-115.11353"></viz:position>
+        <viz:color r="29" g="29" b="168"></viz:color>
       </node>
       <node id="13.0" label="Google">
         <attvalues>
           <attvalue for="modularity_class" value="0"></attvalue>
         </attvalues>
-        <viz:size value="20"></viz:size>
-        <viz:position x="294.11667" y="-221.36052"></viz:position>
+        <viz:size value="8.0"></viz:size>
+        <viz:position x="-181.01697" y="-25.592203"></viz:position>
         <viz:color r="29" g="168" b="168"></viz:color>
       </node>
-    </nodes>
-    <edges>
-      <edge id="254" source="1.0" target="0.0"></edge>
-      <edge id="255" source="2.0" target="0.0" weight="1.933333396911621"></edge>
-      <edge id="256" source="3.0" target="0.0" weight="2.200000047683716"></edge>
-      <edge id="257" source="3.0" target="2.0" weight="1.6666667461395264"></edge>
-      <edge id="258" source="4.0" target="0.0"></edge>
-      <edge id="259" source="5.0" target="0.0"></edge>
-      <edge id="260" source="6.0" target="0.0"></edge>
-      <edge id="261" source="7.0" target="0.0"></edge>
-      <edge id="262" source="8.0" target="0.0" weight="1.1333333253860474"></edge>
-      <edge id="263" source="9.0" target="0.0"></edge>
-      <edge id="264" source="11.0" target="0.0" weight="1.5333333015441895"></edge>
-      <edge id="265" source="11.0" target="2.0" weight="1.2666666507720947"></edge>
-      <edge id="266" source="11.0" target="3.0" weight="1.2666666507720947"></edge>
-      <edge id="267" source="11.0" target="10.0"></edge>
-      <edge id="268" source="12.0" target="11.0"></edge>
-      <edge id="269" source="13.0" target="11.0"></edge>
+      </nodes>
+       <edges>
+      <edge source="1.0" target="0.0">
+        <attvalues>
+          <attvalue for="weight" value="1.0"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="2.0" target="0.0" weight="1.9333334">
+        <attvalues>
+          <attvalue for="weight" value="1.9333334"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="3.0" target="0.0" weight="2.2">
+        <attvalues>
+          <attvalue for="weight" value="2.2"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="3.0" target="2.0" weight="1.6666667">
+        <attvalues>
+          <attvalue for="weight" value="1.6666667"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="4.0" target="0.0">
+        <attvalues>
+          <attvalue for="weight" value="1.0"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="5.0" target="0.0">
+        <attvalues>
+          <attvalue for="weight" value="1.0"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="6.0" target="0.0">
+        <attvalues>
+          <attvalue for="weight" value="1.0"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="7.0" target="0.0">
+        <attvalues>
+          <attvalue for="weight" value="1.0"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="8.0" target="0.0" weight="1.1333333">
+        <attvalues>
+          <attvalue for="weight" value="1.1333333"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="9.0" target="0.0">
+        <attvalues>
+          <attvalue for="weight" value="1.0"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="11.0" target="0.0" weight="1.5333333">
+        <attvalues>
+          <attvalue for="weight" value="1.5333333"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="11.0" target="2.0" weight="1.2666667">
+        <attvalues>
+          <attvalue for="weight" value="1.2666667"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="11.0" target="3.0" weight="1.2666667">
+        <attvalues>
+          <attvalue for="weight" value="1.2666667"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="11.0" target="10.0">
+        <attvalues>
+          <attvalue for="weight" value="1.0"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="12.0" target="11.0">
+        <attvalues>
+          <attvalue for="weight" value="1.0"></attvalue>
+        </attvalues>
+      </edge>
+      <edge source="13.0" target="11.0">
+        <attvalues>
+          <attvalue for="weight" value="1.0"></attvalue>
+        </attvalues>
+      </edge>
     </edges>
   </graph>
 </gexf>
