@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.3.3/css/tabulator.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.3.3/js/tabulator.min.js"></script>
+	<script type="text/javascript" src="dist/js/xlsx.full.min.js"></script>
+	
+	    <style>
+		html, body, div.wrap-frame {
+		    height: 100%;
+		}
+		
+		.modal {
+		    display: none; /* Hidden by default */
+		    position: fixed; /* Stay in place */
+		    z-index: 1; /* Sit on top */
+		    padding-top: 100px; /* Location of the box */
+		    left: 0;
+		    top: 0;
+		    width: 100%; /* Full width */
+		    height: 100%; /* Full height */
+		    overflow: auto; /* Enable scroll if needed */
+		    background-color: rgb(0,0,0); /* Fallback color */
+		    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+		
+		/* Modal Content */
+		.modal-content {
+		    background-color: #fefefe;
+		    margin: auto;
+		    padding: 20px;
+		    border: 1px solid #888;
+		    width: 80%;
+		    height: 80%;
+		}
+		
+		/* The Close Button */
+		.close {
+		    color: #aaaaaa;
+		    float: right;
+		    font-size: 28px;
+		    font-weight: bold;
+		}
+		
+		.close:hover,
+		.close:focus {
+		    color: #000;
+		    text-decoration: none;
+		    cursor: pointer;
+		}
+</style>
+	
+</head>
+
+	<body>
+	
+	    <button id="download">Download Data as CSV</button>
+		<div id="iaMapping"></div>
+
+		<script type="text/javascript">
+		
+		$(window).resize(function(){
+		    $("#download").tabulator("redraw");
+		});
+		
+				$( function() {
+				  $("#iaMapping").tabulator({
+					    groupBy:"tipologia",
+					    layout:"fitColumns",
+					    pagination:"local",
+					    paginationSize:30,
+					    movableColumns:true,
+					  langs:{
+					        "it-it":{
+					            "pagination":{
+					                "first":"Prima",
+					                "first_title":"Prima Pagina",
+					                "last":"Ultima",
+					                "last_title":"Ultima Pagina",
+					                "prev":"Precedente",
+					                "prev_title":"Pagina Precedente",
+					                "next":"Successiva",
+					                "next_title":"Pagina Successiva",
+					            },
+					        },
+					  },
+					  columns:[
+					        {title:"Tipologia", field:"tipologia", width:150, headerFilter:"input"},
+					        {title:"Denominazione", field:"denominazione", headerFilter:"input"},
+					        {title:"Sito Web", field:"website", headerFilter:"input"},
+					        {title:"Città", field:"citta", headerFilter:"input"},
+					        {title:"Regione", field:"regione", align:"center", sorter:"date",  headerFilter:"input"}
+					    ],
+					    rowClick:function(e, row){
+					        //alert("Row " + row.getIndex() + " Clicked!!!!");
+					         $("#dettaglio").attr("src","detail_"+row.getIndex()+".html");
+							 modal.style.display = "block";
+							 
+					    },
+					    
+						});				
+				  
+				var tabledata = [
+					{id:1,tipologia:"Incubatore",denominazione:"RuralHack",website:"http://www.ruralhack.org",citta:"Napoli",regione:"Campania"},
+					{id:2,tipologia:"Azienda",denominazione:"Userbot",website:"https://userbot.ai",citta:"Milano",regione:"Lombardia"},
+					{id:3,tipologia:"Azienda",denominazione:"Gear",website:"http://www.gear.it",citta:"Reggio Emilia",regione:"Emilia-Romagna"},
+					{id:4,tipologia:"Azienda",denominazione:"CINECA",website:"https://www.cineca.it/",citta:"Bologna, Milano, Roma",regione:"Emilia-Romagna"},
+					{id:5,tipologia:"Startup",denominazione:"Xteam SW",website:"http://www.xteamsoftware.com",citta:"Rovigo",regione:"Veneto"},
+					{id:6,tipologia:"Azienda",denominazione:"Competitoor",website:"https://competitoor.com",citta:"Carpi",regione:"Emilia-Romagna"},
+					{id:7,tipologia:"Centro di Ricerca",denominazione:"Centro Piaggio UniPI",website:"http://www.centropiaggio.unipi.it",citta:"Pisa",regione:"Toscana"},
+					{id:8,tipologia:"Azienda",denominazione:"Bozzoole",website:"http://www.buzzoole.com",citta:"Napoli",regione:"Campania"},
+					{id:9,tipologia:"Azienda",denominazione:"Dentsu Aegis",website:"http://www.dentsuaegisnetwork.it/",citta:"Milano",regione:"Lombardia"},
+					{id:10,tipologia:"Azienda",denominazione:"Ermes Security",website:"https://www.ermessecurity.com",citta:"Torino",regione:"Piemonte"},
+					{id:11,tipologia:"Startup",denominazione:"DTOKlab",website:"http://www.dtoklab.com",citta:"Rende (CS)",regione:"Calabria"},
+					{id:12,tipologia:"Azienda",denominazione:"Almawave",website:"http://www.almawave.it",citta:"Varie Sedi (Ita-estero)",regione:"Varie"},
+					{id:13,tipologia:"Azienda",denominazione:"Livetech",website:"http://www.ilivetech.it",citta:"Rende - Roma - Milano",regione:"Calabria"},
+					{id:14,tipologia:"Startup",denominazione:"Kellify",website:"http://kellify.com/",citta:"Genova",regione:"Liguria"},
+					{id:15,tipologia:"Startup",denominazione:"All Industries",website:"http://www.allindustries.it/",citta:"Roma",regione:"Lazio"},
+					{id:16,tipologia:"Startup",denominazione:"Next to me",website:"http://www.nextome.net",citta:"Conversano",regione:"Puglia"},
+					{id:17,tipologia:"Startup",denominazione:"Scratch and Screen",website:"https://www.scratchandscreen.com",citta:"Milano",regione:"Lombardia"},
+					{id:18,tipologia:"Startup",denominazione:"Zoro",website:"https://www.zoro.ai",citta:"Milano",regione:"Lombardia"},
+					{id:19,tipologia:"Azienda",denominazione:"The Fool",website:"http://thefool.it",citta:"Milano",regione:"Lombardia"},
+					{id:20,tipologia:"Startup",denominazione:"Wissen Search",website:"http://www.wissensearch.it",citta:"Roma",regione:"Lazio"},
+					{id:21,tipologia:"Azienda",denominazione:"Spitch",website:"https://spitch.ch/it/",citta:"Milano / HQ Zurigo",regione:"Lombardia"},
+					{id:22,tipologia:"Azienda",denominazione:"Penta Technology",website:"http://www.pentatechnology.it",citta:"Napoli",regione:"Campania"},
+					{id:23,tipologia:"Startup",denominazione:"Nami Lab",website:"http://www.nami-lab.com",citta:"Milano",regione:"Lombardia"},
+					{id:24,tipologia:"Startup",denominazione:"Elif Lab",website:"http://www.eliflab.com",citta:"Monza / Milano",regione:"Lombardia"},
+					{id:25,tipologia:"Startup",denominazione:"Metaliquid",website:"http://www.meta-liquid.com/",citta:"Milano",regione:"Lombardia"},
+					{id:26,tipologia:"Azienda",denominazione:"Orobix",website:"http://www.orobix.com",citta:"Bergamo",regione:"Lombardia"},
+					{id:27,tipologia:"Startup",denominazione:"Good Buy Auto",website:"http://goodbuyauto.it",citta:"Milano",regione:"Lombardia"},
+					{id:28,tipologia:"Università",denominazione:"MEFI - UniPV",website:"https://www.facebook.com/groups/bigmefi/",citta:"Pavia",regione:"Lombardia"},
+					{id:29,tipologia:"Azienda",denominazione:"Heres",website:"https://heres.ai/",citta:"Bologna",regione:"Emilia-Romagna"},
+					{id:30,tipologia:"Università",denominazione:"DISIM - UnivAQ",website:"http://www.disim.univaq.it",citta:"L'Aquila",regione:"Abruzzo"},
+					{id:31,tipologia:"Azienda",denominazione:"Vidiemme Consulting",website:"https://www.vidiemme.it/",citta:"Milano e San Francisco",regione:"Lombardia"},
+					{id:32,tipologia:"Azienda",denominazione:"Reveal",website:"http://www.revealsrl.it/",citta:"Roma",regione:"Lazio"},
+					{id:33,tipologia:"Azienda",denominazione:"Hopenly",website:"http://www.hopenly.com",citta:"Reggio Emilia",regione:"Emilia-Romagna"},
+					{id:34,tipologia:"Azienda",denominazione:"Magneticast",website:"http://www.magneticast.com",citta:"Sicilia",regione:"Sicilia"},
+					{id:35,tipologia:"Centro di Ricerca",denominazione:"IASI CNR",website:"http://www.iasi.cnr.it",citta:"Roma",regione:"Lazio"},
+					{id:36,tipologia:"Azienda",denominazione:"Gruppo Pragma",website:"http://www.gruppopragma.it",citta:"Trieste",regione:"Friuli Venezia Giulia"},
+					{id:37,tipologia:"Azienda",denominazione:"Vetrya",website:"http://www.vetrya.it",citta:"Orvieto",regione:"Umbria"},
+					{id:38,tipologia:"PA",denominazione:"Comune Rimini",website:"http://www.comune.rimini.it",citta:"Rimini",regione:"Emilia-Romagna"},
+					{id:39,tipologia:"Startup",denominazione:"EntityMind",website:"http://www.entitymind.com",citta:"Modena",regione:"Emilia-Romagna"},
+					{id:40,tipologia:"Centro di Ricerca",denominazione:"Economy Up",website:"https://www.economyup.it",citta:"Italia",regione:"Varie"},
+					{id:41,tipologia:"Azienda",denominazione:"Athlos",website:"http://www.athlos.biz",citta:"Cagliari",regione:"Sardegna"},
+					{id:42,tipologia:"PA",denominazione:"INGV",website:"http://www.ingv.it",citta:"Roma",regione:"Lazio"},
+					{id:43,tipologia:"Azienda",denominazione:"Domino",website:"https://www.domino.it/it",citta:"Torino",regione:"Piemonte"},
+					{id:44,tipologia:"Università",denominazione:"SWAP - UniBA",website:"http://www.di.uniba.it/~swap/",citta:"Bari",regione:"Puglia"},
+					{id:45,tipologia:"Università",denominazione:"UniOr Napoli",website:"http://www.unior.it",citta:"Napoli",regione:"Campania"},
+					{id:46,tipologia:"Università",denominazione:"ACRDSI (USA)",website:"http://www.acrdsi.org",citta:"Atlanta, Georgia, USA",regione:"Estero"},
+					{id:47,tipologia:"Centro di Ricerca",denominazione:"Egovmetrics",website:"http://www.egovmetrics.com",citta:"Rizziconi (RC)",regione:"Calabria"},
+					{id:48,tipologia:"Università",denominazione:"Aimage Lab UniMORE",website:"http://aimagelab.unimore.it",citta:"Modena",regione:"Emilia-Romagna"},
+					{id:49,tipologia:"Startup",denominazione:"RiAtlas",website:"http://web.unisa.it/ricerca/spin-off/unisa",citta:"Salerno",regione:"Campania"},
+					{id:50,tipologia:"Startup",denominazione:"MVMANT",website:"http://www.mvmant.it",citta:"Mirabella Imbaccari (CT)",regione:"Sicilia"},
+					{id:51,tipologia:"Azienda",denominazione:"Axel",website:"http://www.axel.ai",citta:"Milano",regione:"Lombardia"},
+					{id:52,tipologia:"Centro di Ricerca",denominazione:"Casaleggio Associati",website:"https://www.casaleggio.it/studi-ricerche/",citta:"Milano",regione:"Lombardia"},
+					{id:53,tipologia:"Azienda",denominazione:"Loop AI Lab",website:"http://www.loop.ai/media-relations",citta:"MI-BO",regione:"Lombardia"},
+					{id:54,tipologia:"Incubatore",denominazione:"Luiss Enlabs Worklab AI",website:"https://luissenlabsacceleration.com/ai/",citta:"Roma",regione:"Lazio"},
+					{id:55,tipologia:"Azienda",denominazione:"Morpheos",website:"http://www.morpheos.eu/",citta:"Catania",regione:"Sicilia"},
+					{id:56,tipologia:"Startup",denominazione:"Aikospace",website:"http://www.aikospace.com",citta:"Torino",regione:"Piemonte"},
+					{id:57,tipologia:"Università",denominazione:"CORPUS-FICLIT-UniBo",website:"http://corpora.ficlit.unibo.it/",citta:"Bologna",regione:"Emilia-Romagna"},
+					{id:58,tipologia:"Azienda",denominazione:"EOS",website:"http://www.eosdev.it",citta:"Pisa",regione:"Toscana"},
+					{id:59,tipologia:"Azienda",denominazione:"OTUS",website:"http://otustechnology.com",citta:"Genova, Milano, Pescara",regione:"Varie"},
+					{id:60,tipologia:"Azienda",denominazione:"Cyberdyne",website:"http://www.cyberdyne.it",citta:"Pescara",regione:"Abruzzo"},
+					{id:61,tipologia:"Università",denominazione:"CLP-UniUD",website:"http://clp.dimi.uniud.it/",citta:"Udine",regione:"Friuli Venezia Giulia"},
+					{id:62,tipologia:"Centro di Ricerca",denominazione:"Dip.Informatica - UniRoma1",website:"https://www.di.uniroma1.it/",citta:"Roma",regione:"Lazio"},
+					{id:63,tipologia:"Azienda",denominazione:"Exprivia",website:"http://www.exprivia.it",citta:"Molfetta (BA)",regione:"Puglia"},
+					{id:64,tipologia:"Startup",denominazione:"OBDA Systems",website:"https://www.obdasystems.com",citta:"Roma",regione:"Lazio"},
+					{id:65,tipologia:"Azienda",denominazione:"Explora",website:"https://www.explora-biotech.com",citta:"Mestre",regione:"Veneto"},
+					{id:66,tipologia:"Università",denominazione:"Dip.Informatica - UniPI",website:"http://www.di.unipi.it/groups/ciml/",citta:"Pisa",regione:"Toscana"},
+					{id:67,tipologia:"Azienda",denominazione:"CELI",website:"https://www.celi.it/",citta:"Torino e Milano",regione:"Varie"},
+					{id:68,tipologia:"Azienda",denominazione:"Expert System",website:"http://www.expertsystem.com/",citta:"Modena",regione:"Emilia-Romagna"},
+					{id:69,tipologia:"Università",denominazione:"ART-UniROma3 Tor Vergata",website:"http://art.uniroma2.it/",citta:"Roma",regione:"Lazio"},
+					{id:70,tipologia:"Startup",denominazione:"Babelscape",website:"http://babelscape.com",citta:"Roma",regione:"Lazio"},
+					{id:71,tipologia:"Azienda",denominazione:"OpenSearchNetwork",website:"http://www.opensearchnetwork.com",citta:"London",regione:"Estero"},
+					{id:72,tipologia:"Università",denominazione:"Laboratorio Kelsen - UniSA",website:"http://www.laboratoriokelsen.unisa.it",citta:"Salerno",regione:"Campania"},
+					{id:73,tipologia:"Azienda",denominazione:"Eclettica",website:"http://www.eclettica.net",citta:"Fisciano (SA)",regione:"Campania"},
+					{id:74,tipologia:"Università",denominazione:"Laboratorio IA - UniPA",website:"http://www.diid.unipa.it/networks/ndslab/",citta:"Palermo",regione:"Sicilia"},
+					{id:75,tipologia:"Azienda",denominazione:"Dedagroup",website:"http://www.dedagroup.it/home",citta:"Trento",regione:"Trentino Alto-Adige"},
+					{id:76,tipologia:"Startup",denominazione:"Conversate",website:"http://www.conversate.eu",citta:"Milano",regione:"Lombardia"},
+					{id:77,tipologia:"Startup",denominazione:"ELSE corp",website:"http://www.else-corp.com",citta:"Milano",regione:"Lombardia"},
+					{id:78,tipologia:"Startup",denominazione:"Brain Control",website:"http://www.braincontrol.com",citta:"Siena",regione:"Toscana"},
+					{id:79,tipologia:"Startup",denominazione:"Kaitiaki",website:"http://www.kaitiaki.it",citta:"Udine",regione:"Friuli Venezia Giulia"},
+					{id:80,tipologia:"Startup",denominazione:"Resonance AI",website:"https://www.resonance-ai.com",citta:"Roma e San Francisco ",regione:"Lazio"},
+					{id:81,tipologia:"Azienda",denominazione:"Grottini Lab",website:"https://www.grottinilab.com",citta:"Portorecanati",regione:"Marche"},
+					{id:82,tipologia:"Azienda",denominazione:"enGenome",website:"http://engenome.com",citta:"Pavia",regione:"Lombardia"},
+					{id:83,tipologia:"Azienda",denominazione:"MindIT",website:"http://www.minditsolutions.it/en/index.html",citta:"Bologna",regione:"Emilia-Romagna"},
+					{id:84,tipologia:"Azienda",denominazione:"QuestIT",website:"https://www.quest-it.com",citta:"Siena",regione:"Toscana"},
+					{id:85,tipologia:"Università",denominazione:"AirLab",website:"http://airlab.deib.polimi.it/",citta:"Milano",regione:"Lombardia"},
+					{id:86,tipologia:"Azienda",denominazione:"XTN Cognitive Security",website:"https://www.xtn-lab.com",citta:"Trento",regione:"Trentino Alto-Adige"},
+					{id:87,tipologia:"Startup",denominazione:"Invictus ",website:"https://invictus.bet",citta:"Roma",regione:"Lazio"},
+					{id:88,tipologia:"Azienda",denominazione:"The Digital Box",website:"https://www.thedigitalbox.net",citta:"Gioia del Colle (BA)",regione:"Puglia"},
+					{id:89,tipologia:"Startup",denominazione:"Smarthink",website:"http://www.smarthink.eu",citta:"Busto Arsizio (VA)",regione:"Lombardia"},
+					{id:90,tipologia:"Centro di Ricerca",denominazione:"ICAR CNR",website:"https://www.icar.cnr.it/",citta:"Napoli, Rende, Palermo",regione:"Campania, Calabria, Sicilia"},
+					{id:91,tipologia:"Universit…",denominazione:"DEIB Polimi",website:"http://www.deib.polimi.it/eng/research-lines/details/118",citta:"Milano",regione:"Lombardia"},
+					{id:92,tipologia:"Centro di Ricerca",denominazione:"HER",website:"https://www.he-r.it/",citta:"Roma",regione:"Lazio"},
+					{id:93,tipologia:"Centro di Ricerca",denominazione:"KRDB",website:"http://krdb.eu",citta:"Bozen-Bolzano",regione:"Trentino Alto-Adige"},
+					{id:94,tipologia:"Azienda",denominazione:"Energy Way",website:"https://www.energyway.it/",citta:"Modena",regione:"Emilia-Romagna"},
+					{id:95,tipologia:"PA",denominazione:"Regione Marche",website:"http://www.regione.marche.it",citta:"Ancona ",regione:"Marche"},
+					{id:96,tipologia:"Azienda",denominazione:"Mivoq",website:"https://www.mivoq.it",citta:"Padova",regione:"Veneto"},
+					{id:97,tipologia:"Università",denominazione:"DISI Unitn",website:"http://disi.unitn.it",citta:"Trento",regione:"Trentino Alto-Adige"},
+					{id:98,tipologia:"Università",denominazione:"IBISLAB UniPr",website:"http://ibislab.ce.unipr.it",citta:"Parma",regione:"Emilia-Romagna"},
+					{id:99,tipologia:"Azienda",denominazione:"DLV System",website:"http://www.dlvsystem.com",citta:"Rende (CS)",regione:"Calabria"},
+					{id:100,tipologia:"Università",denominazione:"Laboratorio di Sistemi Intelligenti UniPmn",website:"http://www.di.unipmn.it/en/research-en/labs-en/lis-en.html",citta:"Alessandria",regione:"Piemonte"},
+					{id:101,tipologia:"Azienda",denominazione:"Datamantix",website:"http://www.datamantix.it",citta:"Udine",regione:"Friuli Venezia Giulia"},
+					{id:102,tipologia:"Centro di Ricerca",denominazione:"Semeion",website:"http://www.semeion.it",citta:"Roma",regione:"Lazio"},
+					{id:103,tipologia:"Università",denominazione:"PraLab UniCa",website:"http://pralab.diee.unica.it/",citta:"Cagliari",regione:"Sardegna"},
+					{id:104,tipologia:"Startup",denominazione:"HitBytes",website:"https://hitbytes.io",citta:"Milano",regione:"Lombardia"},
+					{id:105,tipologia:"Azienda",denominazione:"IT Logix",website:"http://www.itlogix.it",citta:"Viterbo",regione:"Lazio"},
+					{id:106,tipologia:"Azienda",denominazione:"AGS",website:"https://www.ags-it.com/",citta:"Pero (MI)",regione:"Lombardia"},
+					{id:107,tipologia:"Azienda",denominazione:"E-land / E-Puma",website:"http://www.e-puma.it",citta:"Reggio Emilia",regione:"Emilia-Romagna"},
+					{id:108,tipologia:"Azienda",denominazione:"E4 Computer engineering",website:"http://www.e4company.com",citta:"Scandiano (RE)",regione:"Emilia-Romagna"},
+					{id:109,tipologia:"Azienda",denominazione:"GIS Data",website:"http://www.gisdata.it/",citta:"Savona",regione:"Liguria"},
+					{id:110,tipologia:"Azienda",denominazione:"NITE - Naturale Intelligent Technologies",website:"http://www.nitesrl.com",citta:"Fisciano (Salerno)",regione:"Campania"}
+				];
+				
+				
+				$("#download").click(function(){
+					$("#iaMapping").tabulator("download", "xlsx", "data.xlsx");
+				});
+				
+				//load sample data into the table
+				$("#iaMapping").tabulator("setLocale", "it-it");
+				$("#iaMapping").tabulator("setData", tabledata);
+				});
+		</script>
+
+
+		
+		<div id="modalDetail" class="modal">
+		  <div class="modal-content">
+		    <span class="close">&times;</span>
+		       <embed id="dettaglio" src="connections.html" width="100%" height="90%">
+		  </div>
+		</div>
+
+		<script>
+			var modal = document.getElementById('modalDetail');
+			var span = document.getElementsByClassName("close")[0];
+		
+			span.onclick = function() {
+			    modal.style.display = "none";
+			}
+			
+			window.onclick = function(event) {
+			    if (event.target == modal) {
+			        modal.style.display = "none";
+			    }
+			}
+		</script>
+	
+	</body>
+
+</html>  
